@@ -1,5 +1,6 @@
-const pokemonContainer = document.querySelector('.pokemon-container')
-const spinner = document.querySelector('#spinner')
+const pokemonContainer = document.querySelector('.pokemon-container');
+const spinner = document.querySelector('#spinner');
+const buttonsHeader = document.querySelectorAll(".btn-header");
 
 function fetchPokemon(id){
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
@@ -16,6 +17,23 @@ function fetchPokemons(number) {
     fetchPokemon(index)
     }
 }
+
+function buttons(){
+    buttonsHeader.forEach(button => button.addEventListener("click",(event)=>{
+        const buttonId = event.currentTarget.id;
+
+        if (buttonId === "view-all"){
+            fetchPokemons
+        }else {
+            const types = data.types.map(type => type.type.name);
+            if(types.some(type => type.includes(buttonId))){
+                fetchPokemons(data);
+            }
+        }
+
+    }))
+
+};
 
 
 function createPokemon(pokemon){ //DOM 
