@@ -1,6 +1,9 @@
 const pokemonContainer = document.querySelector('.pokemon-container');
 const spinner = document.querySelector('#spinner');
 const buttonsHeader = document.querySelectorAll(".btn-header");
+const searchBar= document.querySelector('.search-bar')
+const searchInput = document.querySelector('.input')
+const ALL_POKEMONS_INFO = [];
 
 function fetchPokemon(id){
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
@@ -18,18 +21,43 @@ function fetchPokemons(number) {
     }
 }
 
+
+//Search bar for pokemon 
+function searchPokemon(value){
+    const pokemon = {
+        name : result.name,
+        id: result.id,
+        types: result.types.map((element) => element.type.name),
+        image: result.sprites.front_default,
+    }
+    const matchName = pokemon.name.includes(value);
+    const matchId = pokemon.id === value;
+    const matchType = pokemon.types.includes(value);
+    
+    
+    return matchName || matchId || matchType;
+
+    
+}
+
+
 function buttons(){
     buttonsHeader.forEach(button => button.addEventListener("click",(event)=>{
         const buttonId = event.currentTarget.id;
 
         if (buttonId === "view-all"){
-            fetchPokemons
+             return fetchPokemon
         }else {
-            const types = data.types.map(type => type.type.name);
+            const types = data.type.map(type => type.type.name);
             if(types.some(type => type.includes(buttonId))){
-                fetchPokemons(data);
+                fetchPokemon(data);
             }
         }
+      if (button === "fire")
+      return fetchPokemon.data.type.map(type => type.type.fire);
+      if(types.some(type => type.includes(buttonId))){
+        fetchPokemon(data);
+      }
 
     }))
 

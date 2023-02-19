@@ -1,0 +1,14 @@
+search bar unfinished 
+searchPokemon(value)
+
+searchInput.addEventListener("input", (value) => {
+    let value = target.value
+
+    if (value && value.trim().length > 0){
+        value = value.trim().toLowerCase()
+
+        setList(pokemon.name.filter(pokemon.name => {
+            return pokemon.name.includes(value)
+        }))
+    }
+})
